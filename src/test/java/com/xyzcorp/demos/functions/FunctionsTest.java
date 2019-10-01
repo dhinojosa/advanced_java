@@ -2,6 +2,7 @@ package com.xyzcorp.demos.functions;
 
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,8 @@ public class FunctionsTest {
     @Test
     public void testMyFilter() {
         List<Integer> numbers = Arrays.asList(4, 5, 7, 8, 10, 11, 14, 15);
-        List<Integer> result = Functions.myFilter(numbers, item -> item % 2 == 0);
+        List<Integer> result = Functions.myFilter(numbers,
+            item -> item % 2 == 0);
         assertEquals(Arrays.asList(4, 8, 10, 14), result);
     }
 
@@ -39,7 +41,7 @@ public class FunctionsTest {
     @Test
     public void testMethodReferenceAStaticMethod() {
         List<Integer> numbers = Arrays.asList(2, 4, 5, 1, 9, 15, 19,
-                21, 33, 78, 93, 10);
+            21, 33, 78, 93, 10);
         System.out.println(Functions.myMap(numbers, Math::abs));
     }
 
@@ -53,7 +55,7 @@ public class FunctionsTest {
     @Test
     public void testMethodReferenceAContainingTypeTrickQuestion() {
         List<Integer> numbers = Arrays.asList(2, 4, 5, 1, 9, 15, 19,
-                21, 33, 78, 93, 10);
+            21, 33, 78, 93, 10);
         System.out.println(Functions.myMap(numbers, Object::toString));
     }
 
@@ -61,7 +63,7 @@ public class FunctionsTest {
     @Test
     public void testTwoOrMoreItemsInALambda() {
         List<Integer> numbers = Arrays.asList(2, 4, 5, 1, 9, 15, 19,
-                21, 33, 78, 93, 10);
+            21, 33, 78, 93, 10);
         System.out.println(Functions.myMap(numbers, x -> {
             int y = 100;
             int z = 10;
@@ -72,37 +74,44 @@ public class FunctionsTest {
     @Test
     public void testMethodReferenceAnInstance() {
         List<Integer> numbers = Arrays.asList(2, 4, 5, 1, 9, 15, 19,
-                21, 33, 78, 93, 10);
+            21, 33, 78, 93, 10);
         TaxRate taxRate2016 = new TaxRate(2016, .085);
         System.out.println(Functions.myMap(numbers, taxRate2016::apply));
     }
 
     @Test
+    public void testMethodReferenceANewType() {
+        List<Integer> numbers = Arrays.asList(2, 4, 5, 1, 9, 15, 19,
+            21, 33, 78, 93, 10);
+        System.out.println(Functions.myMap(numbers, Double::new));
+    }
+
+    @Test
     public void testMyGenerate() {
         List<LocalDateTime> localDateTimes =
-                Functions.myGenerate(() -> {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        //Ignore the exception
-                    }
+            Functions.myGenerate(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    //Ignore the exception
+                }
 
-                    return LocalDateTime.now();
-                }, 10);
+                return LocalDateTime.now();
+            }, 10);
         System.out.println(localDateTimes);
     }
 
     @Test
     public void testLambdasWithRunnable() {
         System.out.format("%s: %s%n",
-                Thread.currentThread().getName(),
-                "Hello from main thread");
+            Thread.currentThread().getName(),
+            "Hello from main thread");
         Thread t = new Thread(() -> {
             String threadName =
-                    Thread.currentThread().getName();
+                Thread.currentThread().getName();
             System.out.format("%s: %s%n",
-                    threadName,
-                    "Hello from another thread");
+                threadName,
+                "Hello from another thread");
         });
         t.start();
     }
