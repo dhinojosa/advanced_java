@@ -3,6 +3,7 @@ package com.xyzcorp.exercises.functions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,5 +52,25 @@ public class FunctionExercises {
     void testSampleWithStandardJUnitAndAssertJAssertion() {
         var result = Math.max(40, 3);
         assertThat(result).isEqualTo(40);
+    }
+
+    @Test
+    void testAllEmployeesSalary() {
+        int actual = managers.stream()
+                          .flatMap(man -> man.getEmployees().stream())
+                          .map(Employee::getSalary)
+                          .mapToInt(i -> i)
+                          .sum();
+        assertEquals(280000, actual);
+    }
+
+    @Test
+    void testAllEmployeesSalaryWithManager() {
+        int actual = managers.stream()
+                             .flatMap(man -> Stream.concat(Stream.of(man), man.getEmployees().stream()))
+                             .map(Employee::getSalary)
+                             .mapToInt(i -> i)
+                             .sum();
+        assertEquals(372000, actual);
     }
 }
