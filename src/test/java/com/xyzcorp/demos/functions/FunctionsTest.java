@@ -1,8 +1,5 @@
 package com.xyzcorp.demos.functions;
 
-import com.xyzcorp.Functions;
-import com.xyzcorp.TaxRate;
-import com.xyzcorp.demos.functions.MyPredicate;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -12,7 +9,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
-public class LambdasTest {
+public class FunctionsTest {
 
     @Test
     public void testMyFilter() {
@@ -21,20 +18,22 @@ public class LambdasTest {
         assertEquals(Arrays.asList(4, 8, 10, 14), result);
     }
 
-
     @Test
     public void testMyMap() {
         List<Integer> numbers = Arrays.asList(4, 5, 7, 8);
         List<Integer> mapped = Functions.myMap(numbers, t -> t + 2);
         assertEquals(Arrays.asList(6, 7, 9, 10), mapped);
-        List<String> strings = Functions.myMap(numbers, Integer::toHexString);
-        Functions.myMap(numbers, Double::new); //whoa
     }
 
     @Test
     public void testMyForEach() {
         List<Integer> numbers = Arrays.asList(4, 5, 7, 8);
-        Functions.myForEach(numbers, System.out::println);
+        Functions.myForEach(numbers, new MyConsumer<Integer>() {
+            @Override
+            public void accept(Integer x) {
+                System.out.println(x);
+            }
+        });
     }
 
     @Test
@@ -49,7 +48,6 @@ public class LambdasTest {
         List<String> words = Arrays.asList("One", "Two", "Three", "Four");
         List<Integer> result = Functions.myMap(words, String::length);
         System.out.println(result);
-        Functions.myFilter(Functions.myMap(words, String::length), x -> x < 3);
     }
 
     @Test
