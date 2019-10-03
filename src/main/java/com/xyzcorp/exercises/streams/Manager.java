@@ -1,4 +1,4 @@
-package com.xyzcorp.exercises.functions;
+package com.xyzcorp.exercises.streams;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,6 +35,8 @@ public class Manager extends Employee {
     @Override
     public String toString() {
         return new StringJoiner(", ", Manager.class.getSimpleName() + "[", "]")
+            .add("firstName = " + getFirstName())
+            .add("lastName = " + getLastName())
             .add("employees=" + employees)
             .toString();
     }
