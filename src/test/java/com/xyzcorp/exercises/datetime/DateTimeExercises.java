@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,11 +35,19 @@ public class DateTimeExercises {
     }
 
     @Test
+    void testWhatDateTimeIsItInBuenosAiresArgentina() {
+        System.out.println(LocalDateTime.now(ZoneId.of("America/Buenos_Aires")));
+    }
+
+    @Test
     void testFindAllAmericasTimeZones() {
-        ZoneId.getAvailableZoneIds().stream().
-            filter(s -> s.startsWith("America"))
-              .map(s -> Arrays.stream(s.split("/")).skip(1).collect(Collectors.joining()))
-              .forEach(System.out::println);
+        Stream<Optional<String>> america =
+            ZoneId.getAvailableZoneIds().stream().
+                filter(s -> s.startsWith("America"))
+                  .map(s -> Arrays.stream(s.split("/"))
+                                  .reduce((s1, s2) -> s2));
+        america.filter(Optional::isPresent)
+               .map(Optional::get).sorted().forEach(System.out::println);
     }
 
     @Test
