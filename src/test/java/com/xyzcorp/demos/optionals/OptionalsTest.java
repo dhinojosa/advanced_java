@@ -11,18 +11,22 @@ import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Fail.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OptionalsTest {
 
     @Test
     public void testOptionalEmpty() {
-        Optional<Integer> empty = Optional.empty();
-        assertThat(empty).isEmpty();
+        Optional<Integer> middleName = Optional.empty();
+        assertThat(middleName).isEmpty();
     }
 
     @Test
     public void testOptionalNonEmpty() {
-        Optional<String> value = Optional.of("Hello");
+        Optional<String> middleName = Optional.of("Chandra");
+        assertThat(middleName).isNotEmpty();
+        assertThat(middleName).contains("Chandra");
     }
 
     @Test
@@ -43,6 +47,12 @@ public class OptionalsTest {
     }
 
     @Test
+    public void testGettingTheValueAndLucky() {
+        Optional<Long> optionalLong = Optional.of(40L);
+        assertThat(optionalLong.get()).isEqualTo(40L);
+    }
+
+    @Test
     public void testGettingTheValueTheBadWay() {
         Optional<Long> optionalLong = Optional.empty();
         assertThatThrownBy(optionalLong::get).isInstanceOf(NoSuchElementException.class);
@@ -50,30 +60,48 @@ public class OptionalsTest {
 
     @Test
     public void testGettingTheValueTheGoodWayUsingGetOrElse() {
-        Optional<Long> optionalLong = Optional.of(40L);
+        Optional<Long> optionalLong = Optional.empty();
         Long result = optionalLong.orElse(-1L);
         assertThat(result).isEqualTo(-1);
     }
 
-
-    @Test
-    public void testGettingTheValueTheGoodWayUsingOrElseGetSupplier() {
-        Optional<Long> optionalLong = Optional.of(40L);
-        Long result = optionalLong.orElseGet(this::getDefaultAverage);
-        assertThat(result).isEqualTo(30L);
-    }
-
-    @Test
-    public void testPriorityQueue() throws Exception {
-        Queue<Person> queue = new PriorityQueue<>(new CollectionsTest.PersonComparator());
-        queue.offer(new Person("Franz", "Kafka"));
-        queue.offer(new Person("Jane", "Austen"));
-        queue.offer(new Person("Leo", "Tolstoy"));
-        queue.offer(new Person("Lewis", "Carroll"));
-        assert(Optional.ofNullable(queue.peek()).map(Person::getLastName).orElse("").equals("Austen"));
-    }
-
     private Long getDefaultAverage() {
         return 30L;
+    }
+
+    @Test
+    public void testGettingTheValueTheGoodWayUsingOrElseGet() {
+        Optional<Long> optionalLong = Optional.of(40L);
+        Long result = optionalLong.orElseGet(this::getDefaultAverage);
+        assertThat(result).isEqualTo(40L);
+    }
+
+    @Test
+    public void testGettingTheValueWithIfPresentOrElse() {
+        Optional<Long> optionalLong = Optional.of(40L);
+        optionalLong
+            .ifPresentOrElse(
+                x -> assertEquals(40L, x),
+                () -> System.out.println("Not good"));
+    }
+
+    @Test
+    public void testOptionalWithMap() {
+        Optional<Integer> i = Optional.of(40);
+        Optional<Integer> result = i.map(a -> a * 20);
+        result.ifPresentOrElse(
+             a -> assertThat(a).isEqualTo(800),
+             () -> fail("It did not pass"));
+    }
+
+    @Test
+    public void testOptionalWithFlatMap() {
+        Optional<Integer> i = Optional.of(40);
+        Optional<Integer> j = Optional.of(90);
+        Optional<Integer> result = i.flatMap(a -> j.map(b -> a * b));
+
+        result.ifPresentOrElse(
+             a -> assertThat(a).isEqualTo(3600),
+             () -> fail("It did not pass"));
     }
 }
