@@ -1,4 +1,4 @@
-package com.xyzcorp.exercises.functions;
+package com.xyzcorp.exercises.streams;
 
 import java.util.List;
 import java.util.Objects;
