@@ -46,8 +46,7 @@ public class DateTimeExercises {
                 filter(s -> s.startsWith("America"))
                   .map(s -> Arrays.stream(s.split("/"))
                                   .reduce((s1, s2) -> s2));
-        america.filter(Optional::isPresent)
-               .map(Optional::get).sorted().forEach(System.out::println);
+        america.flatMap(Optional::stream).sorted().forEach(System.out::println);
     }
 
     @Test
