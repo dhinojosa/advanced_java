@@ -36,93 +36,36 @@ public class StreamsExercises {
 
     @Test
     void testConvertIntegerListToHexadecimal() {
-        List<String> actual = Arrays.asList(1, 50, 100, 200, 921)
-                                    .stream()
-                                    .map(Integer::toHexString)
-                                    .collect(Collectors.toList());
-        assertThat(actual).contains("1", "32", "64", "c8", "399");
+
     }
 
     @Test
     void testConvertIntegerListToDouble() {
-        List<Double> actual = Arrays.asList(1, 50, 100, 200, 921)
-                                    .stream()
-                                    .map(Double::valueOf)
-                                    .collect(Collectors.toList());
-        assertThat(actual).contains(1.0, 50.0, 100.0, 200.0, 921.0);
+
     }
 
     @Test
-    void testFactorial() {
-        Integer result = Factorial.factorial(5);
-        assertThat(result).isEqualTo(120);
+    void testFactorialUsingStreams() {
+
     }
 
     @Test
     void testFindTopFiveEmployees() {
-        Stream<Employee> allEmployees =
-            Stream.concat(jkRowlingsEmployees.stream(),
-            georgeLucasEmployees.stream());
-        String result = allEmployees
-            .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
-            .limit(5)
-            .map(e -> String.format("%s, %d",
-                e.getFirstName() + " " + e.getLastName(),
-                e.getSalary()))
-            .collect(Collectors.joining("\n"));
 
-        System.out.println(result);
-    }
-
-    @Test
-    void testAllEmployeesSalary() {
-        int actual = managers.stream()
-                             .flatMap(man -> man.getEmployees().stream())
-                             .map(Employee::getSalary)
-                             .mapToInt(i -> i)
-                             .sum();
-        assertEquals(280000, actual);
     }
 
     @Test
     void testAllEmployeesSalaryWithManager() {
-        int actual = managers.stream()
-                             .flatMap(man -> Stream.concat(Stream.of(man),
-                                 man.getEmployees().stream()))
-                             .map(Employee::getSalary)
-                             .mapToInt(i -> i)
-                             .sum();
-        assertEquals(372000, actual);
+
     }
 
     @Test
     void testWhichManagersEmployeesArePaidMore() {
-        Map<Manager, Integer> managers = this.managers.stream()
-                                                      .collect(Collectors.toMap(m -> m, m -> m.getEmployees().stream().mapToInt(Employee::getSalary).sum()));
-        Optional<Map.Entry<Manager, Integer>> max =
-            managers.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue));
 
-        max.ifPresentOrElse(System.out::println, () -> fail("Didn't work"));
     }
 
     @Test
     void testCreateAMapOfEmployeeKeyWithManagerValue() {
-        var streams = managers.stream()
-                              .map(m -> m.getEmployees()
-                                         .stream()
-                                         .collect(Collectors.toMap(Function.identity(), employee -> m)));
 
-        Optional<Map<Employee, Manager>> possibleReduce =
-            streams.reduce((map1, map2) -> {
-                map1.putAll(map2);
-                return map1;
-            });
-
-        System.out.println(possibleReduce.get());
-        possibleReduce.ifPresentOrElse(map -> {
-            assertThat(map).contains(
-                Map.entry(new Employee("Princess", "Leia", 36000), georgeLucas)
-            );
-        }, () -> fail("No Result"));
     }
 }
