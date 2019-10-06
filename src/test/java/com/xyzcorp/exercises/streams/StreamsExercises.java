@@ -53,7 +53,7 @@ public class StreamsExercises {
     }
 
     @Test
-    void testFactorialCreator() {
+    void testFactorial() {
         Integer result = Factorial.factorial(5);
         assertThat(result).isEqualTo(120);
     }
@@ -106,7 +106,7 @@ public class StreamsExercises {
     }
 
     @Test
-    void testMakeAMapOfJKAndGeorge() {
+    void testCreateAMapOfEmployeeKeyWithManagerValue() {
         var streams = managers.stream()
                               .map(m -> m.getEmployees()
                                          .stream()
@@ -118,6 +118,7 @@ public class StreamsExercises {
                 return map1;
             });
 
+        System.out.println(possibleReduce.get());
         possibleReduce.ifPresentOrElse(map -> {
             assertThat(map).contains(
                 Map.entry(new Employee("Princess", "Leia", 36000), georgeLucas)
