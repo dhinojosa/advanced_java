@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.AbstractMap;
 import java.util.Map;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class OptionalExercises {
 
@@ -37,65 +34,26 @@ class OptionalExercises {
 
     @Test
     void testGettingGreeceCurrency() {
-        Optional.ofNullable(europeanCountriesCapitals
-            .get("Greece"))
-                .ifPresentOrElse(s -> assertEquals("Athens", s),
-                    () -> System.out.println("No currency found"));
+
     }
 
     @Test
     void testGettingHungaryCurrency() {
-        Optional.ofNullable(europeanCountriesCapitals
-            .get("Hungary"))
-                .ifPresentOrElse(s -> fail("Should not be found"),
-                    () -> assertTrue(true));
+
     }
 
     @Test
     void testGettingFromNorwayTheCapitalAndCurrency() {
-        Optional<Pair<String, Integer>> capitalAndPopulation =
-            getPopulationOfCapitalCity("Norway");
 
-        Pair<String, Integer> expected = new Pair<>("Oslo", 634_293);
-
-        capitalAndPopulation
-            .ifPresentOrElse(p -> assertEquals(expected, p),
-                () -> fail("Unable to locate"));
     }
 
     @Test
     void testGettingFromGreeceTheCapitalAndPopulation() {
-        Optional<Pair<String, Integer>> capitalAndPopulation =
-            getPopulationOfCapitalCity("Greece");
 
-        capitalAndPopulation
-            .ifPresentOrElse(p -> fail("Should not be found"),
-                () -> assertTrue(true));
     }
 
     @Test
     void testGettingFromNorwayTheCountryAndCapitalAndCurrency() {
-        Optional<Triple<String, String, Integer>> capitalAndPopulation =
-            getPopulationOfCountryCapitalCity("Norway");
 
-        Triple<String, String, Integer> expected = new Triple<>("Norway", "Oslo", 634_293);
-
-        capitalAndPopulation
-            .ifPresentOrElse(p -> assertEquals(expected, p),
-                () -> fail("Unable to locate"));
-    }
-
-    private Optional<Pair<String, Integer>> getPopulationOfCapitalCity(String country) {
-        return Optional.ofNullable(europeanCountriesCapitals.get(country))
-                       .flatMap(cap ->
-                           Optional.ofNullable(europeanCapitalPopulation.get(cap))
-                                               .map(pop -> new Pair<>(cap, pop)));
-    }
-
-    private Optional<Triple<String, String, Integer>> getPopulationOfCountryCapitalCity(String country) {
-        return Optional.ofNullable(europeanCountriesCapitals.get(country))
-                       .flatMap(cap ->
-                           Optional.ofNullable(europeanCapitalPopulation.get(cap))
-                                   .map(pop -> new Triple<>(country, cap, pop)));
     }
 }
