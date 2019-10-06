@@ -27,6 +27,14 @@ public class FunctionsTest {
     }
 
     @Test
+    public void testMyFlatMap() {
+        List<Integer> numbers = Arrays.asList(4, 5, 7, 8);
+        List<Integer> mapped = Functions.myFlatMap(numbers,
+            t -> List.of(t - 1, t, t + 1));
+        assertEquals(Arrays.asList(3, 4, 5, 4, 5, 6, 6, 7, 8, 7, 8, 9), mapped);
+    }
+
+    @Test
     public void testMyForEach() {
         List<Integer> numbers = Arrays.asList(4, 5, 7, 8);
         Functions.myForEach(numbers, new MyConsumer<Integer>() {
