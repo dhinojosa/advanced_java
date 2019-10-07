@@ -2,7 +2,7 @@ package com.xyzcorp.demos.generics.people;
 
 import java.util.Objects;
 
-public class American extends Person {
+public class American extends NorthAmerican {
     private String ssn;
 
     public String getSsn() {
