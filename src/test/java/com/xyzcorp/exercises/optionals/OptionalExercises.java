@@ -33,17 +33,17 @@ class OptionalExercises {
         new AbstractMap.SimpleEntry<>("Lisbon", 504_718));
 
     @Test
-    void testGettingGreeceCurrency() {
+    void testGettingGreeceCapital() {
 
     }
 
     @Test
-    void testGettingHungaryCurrency() {
+    void testGettingHungaryCapital() {
 
     }
 
     @Test
-    void testGettingFromNorwayTheCapitalAndCurrency() {
+    void testGettingFromNorwayTheCapitalAndPopulation() {
 
     }
 
@@ -53,7 +53,7 @@ class OptionalExercises {
     }
 
     @Test
-    void testGettingFromNorwayTheCountryAndCapitalAndCurrency() {
+    void testGettingFromNorwayTheCountryAndCapital() {
 
     }
 }
