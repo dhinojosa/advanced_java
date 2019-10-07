@@ -6,6 +6,7 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OptionalExercises {
@@ -36,23 +37,20 @@ class OptionalExercises {
         new AbstractMap.SimpleEntry<>("Lisbon", 504_718));
 
     @Test
-    void testGettingGreeceCurrency() {
+    void testGettingGreeceCapital() {
         Optional.ofNullable(europeanCountriesCapitals
             .get("Greece"))
                 .ifPresentOrElse(s -> assertEquals("Athens", s),
-                    () -> System.out.println("No currency found"));
+                    () -> fail("This shouldn't happen"));
     }
 
     @Test
-    void testGettingHungaryCurrency() {
-        Optional.ofNullable(europeanCountriesCapitals
-            .get("Hungary"))
-                .ifPresentOrElse(s -> fail("Should not be found"),
-                    () -> assertTrue(true));
+    void testGettingHungaryCapital() {
+        assertThat(europeanCountriesCapitals.get("Hungary")).isEmpty();
     }
 
     @Test
-    void testGettingFromNorwayTheCapitalAndCurrency() {
+    void testGettingFromNorwayTheCapitalAndPopulation() {
         Optional<Pair<String, Integer>> capitalAndPopulation =
             getPopulationOfCapitalCity("Norway");
 
@@ -74,7 +72,7 @@ class OptionalExercises {
     }
 
     @Test
-    void testGettingFromNorwayTheCountryAndCapitalAndCurrency() {
+    void testGettingFromNorwayTheCountryAndCapitalAndPopulation() {
         Optional<Triple<String, String, Integer>> capitalAndPopulation =
             getPopulationOfCountryCapitalCity("Norway");
 
