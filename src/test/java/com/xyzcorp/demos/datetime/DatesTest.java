@@ -34,18 +34,11 @@ public class DatesTest {
     }
 
     @Test
-    public void testChronoField() throws Exception {
-        int hour = Instant.now().get(ChronoField.HOUR_OF_DAY);
-        System.out.println(hour);
-    }
-    @Test
     public void testCreateLocalDateWithOf() {
         LocalDate february20th = LocalDate.of(2014,
             Month.FEBRUARY,
             20);
         System.out.println(february20th);
-
-
     }
 
     @Test
@@ -54,7 +47,7 @@ public class DatesTest {
             Month.FEBRUARY,
             20);
         System.out.println(LocalDate
-            .from();
+            .from(february20th.plus(10, ChronoUnit.DAYS)));
     }
 
     @Test

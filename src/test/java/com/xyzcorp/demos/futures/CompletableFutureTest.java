@@ -265,13 +265,4 @@ public class CompletableFutureTest {
                       .exceptionally(x -> -1).thenAccept(System.out::println);
         Thread.sleep(1000);
     }
-
-    @Test
-    public void testCasting() {
-        ExecutorService executorService = Executors.newFixedThreadPool(40);
-        Future<Integer> integerFuture = executorService.submit(() -> 4000);
-        CompletableFuture<Integer> completableFuture =
-                (CompletableFuture<Integer>) integerFuture;
-        completableFuture.thenApply(x -> x + 3000).thenAccept(System.out::println);
-    }
 }
