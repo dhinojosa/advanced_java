@@ -20,7 +20,7 @@ public class SafeVarArgsTest {
      */
     @SuppressWarnings("UnnecessaryLocalVariable")
     @SafeVarargs
-    private final void process(List<String>... args) {
+    private void process(List<String>... args) {
         System.out.println(args.getClass().getName());
         System.out.println(args.getClass().getComponentType());
 

@@ -18,8 +18,8 @@ public class BridgeTest {
      */
     @Test
     public void testBridgeMethod() {
-        Node<Integer> base = new MyNode(5);
-        Integer data = base.getData();
-        assertThat(data).isEqualTo(5);
+        Node base = new MyNode(5); //Assigning to the raw form
+        base.setData(40); //Not preferred but should still work
+
     }
 }

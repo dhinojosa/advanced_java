@@ -8,9 +8,7 @@ import java.util.List;
 
 @SuppressWarnings(value = {"WeakerAccess", "unused", "RedundantTypeArguments"})
 public class CovariantTest {
-    public void processCovariantList(
-            List<? extends NorthAmerican> northAmericansOrLower) {
-
+    public void processCovariantList(List<? extends NorthAmerican> northAmericansOrLower) {
         Object object = northAmericansOrLower.get(0);
         Person person = northAmericansOrLower.get(0);
         NorthAmerican northAmerican = northAmericansOrLower.get(0);

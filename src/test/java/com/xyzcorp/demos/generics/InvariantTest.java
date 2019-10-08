@@ -14,7 +14,6 @@ public class InvariantTest {
         Person person = americans.get(1);                //producer
         NorthAmerican northAmerican = americans.get(1);  //producer
         American american = americans.get(1);            //producer
-        //NewMexican newMexican = americans.get(0);
         americans.add(new American());                   //consumer
         americans.add(new Massachusettsan());            //consumer
         americans.add(new Coloradan());                  //consumer

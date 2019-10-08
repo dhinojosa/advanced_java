@@ -70,8 +70,7 @@ public class DatesTest {
 
     @Test
     public void testStandardTime() {
-        LocalDateTime standardTime6 = LocalDateTime.of(
-            2014, 11, 15, 1, 30, 0, 0);
+        LocalDateTime standardTime6 = LocalDateTime.of(2014, 11, 15, 1, 30, 0, 0);
         System.out.println(standardTime6.atZone(ZoneId.of("America/New_York")));
         System.out.println(standardTime6.atZone(ZoneId.of("America/New_York"))
                                         .withEarlierOffsetAtOverlap().toInstant().getEpochSecond());
@@ -81,8 +80,7 @@ public class DatesTest {
 
     @Test
     public void formatLocalDate() {
-        DateTimeFormatter dateFormatter =
-            DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         System.out.println(dateFormatter.format(LocalDate.now()));
     }
 
