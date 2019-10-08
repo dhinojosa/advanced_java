@@ -1,6 +1,5 @@
 package com.xyzcorp.demos.reactive;
 
-import com.evolutionnext.other.TickerPriceFinder;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
