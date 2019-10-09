@@ -90,14 +90,14 @@ public class FutureBasicsTest {
     @Test
     public void testGettingUrl() throws ExecutionException, InterruptedException {
         Future<Stream<String>> future =
-                downloadingContentFromURL("http://www.sunsentinel.com");
+                downloadingContentFromURL("https://openjdk.java.net/");
         while (!future.isDone()) {
             Thread.sleep(1000);
             System.out.println("Doing Something Else");
         }
         Stream<String> allStrings = future.get();
         allStrings
-                .filter(x -> x.contains("Weather"))
+                .filter(x -> x.contains("Java"))
                 .forEach(System.out::println);
         Thread.sleep(5000);
     }
