@@ -14,24 +14,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.comparingInt;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class DateTimeExercises {
     @Test
     void testIterateWithThreeDays() {
-        List<LocalDate> firstSixEveryThirdDaysOf2018 =
-            Stream.iterate(LocalDate.of(2018, 1, 1),
-                localDate -> localDate.plus(3, ChronoUnit.DAYS))
-                  .limit(6).collect(Collectors.toList());
-
-        assertThat(firstSixEveryThirdDaysOf2018).contains(
-            LocalDate.of(2018, 1, 1),
-            LocalDate.of(2018, 1, 4),
-            LocalDate.of(2018, 1, 7),
-            LocalDate.of(2018, 1, 10),
-            LocalDate.of(2018, 1, 13),
-            LocalDate.of(2018, 1, 16)
-        );
+        List<LocalDate> firstThreeDaysFromToday =
+            Stream.iterate(LocalDate.now(),
+                localDate -> localDate.plus(5, ChronoUnit.DAYS))
+                  .limit(3).collect(Collectors.toList());
+        System.out.println(firstThreeDaysFromToday);
     }
 
     @Test
