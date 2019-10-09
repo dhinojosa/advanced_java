@@ -1,6 +1,8 @@
 package com.xyzcorp.demos.collections;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Multimap;
 import com.xyzcorp.demos.generics.people.EyeColor;
 import com.xyzcorp.demos.generics.people.Person;
@@ -98,5 +100,30 @@ public class CollectionsTest {
         mm.put("49ers", 1987);
 
         System.out.println("mm = " + mm);
+    }
+
+    @Test
+    public void testHashBiMap() {
+        BiMap<String, String> englishBulgarianDictionary = HashBiMap.create();
+        englishBulgarianDictionary.put("Thank you", "Blagodaryia");
+        englishBulgarianDictionary.put("Good Day", "Dobur Den");
+        englishBulgarianDictionary.put("Attention", "Vnemanie");
+
+        System.out.println(englishBulgarianDictionary.get("Attention"));
+
+        BiMap<String, String> bulgarianEnglishDictionary = englishBulgarianDictionary.inverse();
+
+        System.out.println(bulgarianEnglishDictionary.get("Dobur Den"));
+
+        bulgarianEnglishDictionary.put("Badem", "Almond");
+
+        System.out.println(englishBulgarianDictionary.get("Almond"));
+
+        englishBulgarianDictionary.put("Almond", "Oval Shaped Nut");
+
+        System.out.println(englishBulgarianDictionary.get("Almond"));
+
+
+
     }
 }

@@ -1,6 +1,7 @@
 package com.xyzcorp.demos.collections;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Album {
 
@@ -55,11 +56,10 @@ public class Album {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Album{");
-        sb.append("title='").append(title).append('\'');
-        sb.append(", year=").append(year);
-        sb.append(", name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new StringJoiner(", ", Album.class.getSimpleName() + "[", "]")
+            .add("title='" + title + "'")
+            .add("year=" + year)
+            .add("name='" + name + "'")
+            .toString();
     }
 }
