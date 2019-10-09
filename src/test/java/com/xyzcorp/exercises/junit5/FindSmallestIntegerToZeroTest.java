@@ -26,11 +26,13 @@ public class FindSmallestIntegerToZeroTest {
             of(Arrays.asList(-1, 1, 2), Optional.of(1)),
             of(Arrays.asList(-40, 1, 2), Optional.of(1)),
             of(Arrays.asList(1, -40, 3, 66), Optional.of(1)),
-            of(Arrays.asList(-1, -40, 3, 66), Optional.of(1)),
+            of(Arrays.asList(-1, -40, 3, 66), Optional.of(-1)),
             of(Arrays.asList(-1, 1), Optional.of(1)),
             of(Arrays.asList(-5, 5), Optional.of(5)),
             of(Arrays.asList(-7, 7), Optional.of(7)),
-            of(Arrays.asList(-14, -7, 7, 14), Optional.of(7))
+            of(Arrays.asList(-14, -7, 7, 14), Optional.of(7)),
+            of(Arrays.asList(-2,1,2), Optional.of(1)),
+            of(Arrays.asList(2, -1, 1), Optional.of(1))
         );
     }
 
@@ -39,15 +41,15 @@ public class FindSmallestIntegerToZeroTest {
     void testFindSmallestIntegerToZeroGivenParams(List<Integer> list,
                                                   Optional<Integer> expected) {
         assertEquals(expected,
-            FindSmallestIntegerToZero.findSmallestIntegerToZero(list));
+            FindSmallestIntegerToZero.find(list));
     }
 
     @Test
     void testThatFindSmallIntegerToZeroCannotAcceptNull() {
         Throwable exception = assertThrows(NullPointerException.class, () -> {
-            FindSmallestIntegerToZero.findSmallestIntegerToZero(null);
+            FindSmallestIntegerToZero.find(null);
         });
 
-        assertEquals(FindSmallestIntegerToZero.CANNOT_ACCEPT_NULL_AS_AN_ARGUMENT_MSG, exception.getMessage());
+        assertEquals(FindSmallestIntegerToZero.LIST_IS_NULL, exception.getMessage());
     }
 }
