@@ -1,9 +1,7 @@
 package com.xyzcorp.demos.streams;
 
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.*;
@@ -320,19 +318,20 @@ public class StreamsTest {
     }
 
 
-    @Test
-    public void testGeneralStreamCount() {
-        long count = Stream.of(12, 4, 10).count();
-        assertThat(count).isEqualTo(3);
-    }
-
     /**
      * Terminal Operators
      **/
+
     @Test
     public void testSpecializedStreamCount() {
         long count = IntStream.range(0, 20).count();
         assertThat(count).isEqualTo(20);
+    }
+
+    @Test
+    public void testGeneralStreamCount() {
+        long count = Stream.of(12, 4, 10).count();
+        assertThat(count).isEqualTo(3);
     }
 
 
@@ -383,8 +382,7 @@ public class StreamsTest {
     /* Infinite Streams */
     @Test
     public void testIterate() {
-        Stream<Integer> iterate = Stream.iterate(0,
-            integer -> integer + 3);
+        Stream<Integer> iterate = Stream.iterate(0, integer -> integer + 3);
         List<Integer> result = iterate.limit(5).collect(Collectors.toList());
         System.out.println(result);
     }
