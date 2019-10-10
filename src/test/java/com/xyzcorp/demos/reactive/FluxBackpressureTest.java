@@ -1,6 +1,6 @@
 package com.xyzcorp.demos.reactive;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
@@ -11,7 +11,7 @@ public class FluxBackpressureTest {
 
     private Flux<Integer> crazedFlux;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         crazedFlux = Flux.create(sink -> {
             int i = 0;
