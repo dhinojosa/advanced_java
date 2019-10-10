@@ -45,5 +45,4 @@ public class DurationPeriodTest {
         System.out.println(between);
         System.out.println(now);
     }
-    //Lab Idea
 }

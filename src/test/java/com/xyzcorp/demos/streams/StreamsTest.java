@@ -323,17 +323,16 @@ public class StreamsTest {
      **/
 
     @Test
-    public void testSpecializedStreamCount() {
-        long count = IntStream.range(0, 20).count();
-        assertThat(count).isEqualTo(20);
-    }
-
-    @Test
     public void testGeneralStreamCount() {
         long count = Stream.of(12, 4, 10).count();
         assertThat(count).isEqualTo(3);
     }
 
+    @Test
+    public void testSpecializedStreamCount() {
+        long count = IntStream.range(0, 20).count();
+        assertThat(count).isEqualTo(20);
+    }
 
     @Test
     public void testReduceWithoutASeed() {
@@ -392,7 +391,7 @@ public class StreamsTest {
         List<Integer> result = Stream.iterate(0, x -> x <= 5,
             integer -> integer + 1).collect(Collectors.toList());
         System.out.println(result);
-        assertThat(result).isEqualTo(List.of(1,2,3,4,5));
+        assertThat(result).isEqualTo(List.of(0,1,2,3,4,5));
     }
 
     @Test
