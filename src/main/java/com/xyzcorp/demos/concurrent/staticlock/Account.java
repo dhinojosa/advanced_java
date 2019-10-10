@@ -5,8 +5,8 @@ class Account {
     public Account() {
     }
     //The static makes the class become the lock
-    public synchronized void deposit(int amount) {
-        //synchronized (Account.class) {
+    public void deposit(int amount) {
+        synchronized (Account.class) {
             System.out.format("Thread %s, Amount: %d%n", Thread.currentThread().getName(), amount);
             this.amount = amount;
             try {
@@ -14,7 +14,11 @@ class Account {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
 
+    public synchronized int getAmount() {
+        return amount;
     }
 
     public static void main(String[] args) {
