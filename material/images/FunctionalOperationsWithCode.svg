@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="61cm" height="9cm" viewBox="118 190 1205 167" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #3946b2" x="181" y="192" width="198" height="126" rx="30" ry="30"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke-linejoin: round; stroke: #000000" x="181" y="192" width="198" height="126" rx="30" ry="30"/>
+  </g>
+  <text font-size="19.7556" style="fill: #ffffff;text-anchor:start;font-family:Arial;font-style:normal;font-weight:700" x="247" y="264">
+    <tspan x="247" y="264">Source</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 4; stroke-linejoin: round; stroke: #3946b2" x1="381" y1="258" x2="453.001" y2="257.143"/>
+    <polygon style="fill: #3946b2" points="453.06,262.142 463,257.024 452.941,252.143 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #3946b2" points="453.06,262.142 463,257.024 452.941,252.143 "/>
+  </g>
+  <g>
+    <rect style="fill: #3946b2" x="468" y="194.5" width="198" height="126" rx="30" ry="30"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke-linejoin: round; stroke: #000000" x="468" y="194.5" width="198" height="126" rx="30" ry="30"/>
+  </g>
+  <text font-size="19.7556" style="fill: #ffffff;text-anchor:middle;font-family:Arial;font-style:normal;font-weight:700" x="570" y="250.3">
+    <tspan x="570" y="250.3">Intermediate</tspan>
+    <tspan x="570" y="274.994">Operation</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 4; stroke-linejoin: round; stroke: #3946b2" x1="666" y1="257.5" x2="740.024" y2="257.5"/>
+    <polygon style="fill: #3946b2" points="740.024,262.5 750.024,257.5 740.024,252.5 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #3946b2" points="740.024,262.5 750.024,257.5 740.024,252.5 "/>
+  </g>
+  <g>
+    <rect style="fill: #3946b2" x="752.024" y="194.5" width="198" height="126" rx="30" ry="30"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke-linejoin: round; stroke: #000000" x="752.024" y="194.5" width="198" height="126" rx="30" ry="30"/>
+  </g>
+  <text font-size="19.7556" style="fill: #ffffff;text-anchor:middle;font-family:Arial;font-style:normal;font-weight:700" x="854.024" y="250.3">
+    <tspan x="854.024" y="250.3">Intermediate</tspan>
+    <tspan x="854.024" y="274.994">Operation</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 4; stroke-linejoin: round; stroke: #ffa500" x1="950.024" y1="257.5" x2="1024.02" y2="256.64"/>
+    <polygon style="fill: #ffa500" points="1024.08,261.639 1034.02,256.523 1023.97,251.64 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 4; stroke: #ffa500" points="1024.08,261.639 1034.02,256.523 1023.97,251.64 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffa500" x="1036.02" y="193.5" width="198" height="126" rx="30" ry="30"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke-linejoin: round; stroke: #ffa500" x="1036.02" y="193.5" width="198" height="126" rx="30" ry="30"/>
+  </g>
+  <text font-size="19.7556" style="fill: #ffffff;text-anchor:middle;font-family:Arial;font-style:normal;font-weight:700" x="1138.02" y="249.853">
+    <tspan x="1138.02" y="249.853">Terminal </tspan>
+    <tspan x="1138.02" y="274.547">Operation</tspan>
+  </text>
+  <text font-size="18.0622" style="fill: #000000;text-anchor:start;font-family:Source Code Pro;font-style:normal;font-weight:normal" x="119" y="353">
+    <tspan x="119" y="353">Arrays.asList(1,2,3,4).stream()</tspan>
+  </text>
+  <text font-size="18.0622" style="fill: #000000;text-anchor:start;font-family:Source Code Pro;font-style:normal;font-weight:normal" x="481" y="352.25">
+    <tspan x="481" y="352.25">.map(x -&gt; x + 1)</tspan>
+  </text>
+  <text font-size="18.0622" style="fill: #000000;text-anchor:start;font-family:Source Code Pro;font-style:normal;font-weight:normal" x="716" y="352.25">
+    <tspan x="716" y="352.25">.filter(x -&gt; x % 2 == 0)</tspan>
+  </text>
+  <text font-size="18.0622" style="fill: #000000;text-anchor:start;font-family:Source Code Pro;font-style:normal;font-weight:normal" x="998" y="350.25">
+    <tspan x="998" y="350.25">.collect(Collectors.toList());</tspan>
+  </text>
+</svg>
