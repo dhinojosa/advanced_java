@@ -16,7 +16,7 @@ public class FutureBasicsTest {
     public void testBasicFuture() throws ExecutionException,
             InterruptedException {
         ExecutorService fixedThreadPool =
-                Executors.newFixedThreadPool(5);
+                Executors.newFixedThreadPool(4);
 
         Callable<Integer> callable = new Callable<Integer>() {
             @Override
@@ -53,6 +53,7 @@ public class FutureBasicsTest {
             @Override
             public Integer call() throws Exception {
                 Thread.sleep(3000);
+                System.out.println("Done waiting, returning");
                 return 5 + 3;
             }
         };
@@ -72,18 +73,15 @@ public class FutureBasicsTest {
 
     private Future<Stream<String>> downloadingContentFromURL(final String url) {
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        return cachedThreadPool.submit(new Callable<Stream<String>>() {
-            @Override
-            public Stream<String> call() throws Exception {
-                URL netUrl = new URL(url);
-                URLConnection urlConnection = netUrl.openConnection();
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(
-                                urlConnection.getInputStream()));
-                return reader
-                        .lines()
-                        .flatMap(x -> Arrays.stream(x.split(" ")));
-            }
+        return cachedThreadPool.submit(() -> {
+            URL netUrl = new URL(url);
+            URLConnection urlConnection = netUrl.openConnection();
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(
+                    urlConnection.getInputStream()));
+            return reader
+                .lines()
+                .flatMap(x -> Arrays.stream(x.split(" ")));
         });
     }
 
@@ -108,12 +106,9 @@ public class FutureBasicsTest {
 
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
-        FutureTask<Integer> futureTask = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                Thread.sleep(5000);
-                return 510 + 40;
-            }
+        FutureTask<Integer> futureTask = new FutureTask<>(() -> {
+            Thread.sleep(5000);
+            return 510 + 40;
         });
 
 
