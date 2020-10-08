@@ -1,12 +1,11 @@
 package com.xyzcorp.demos.datetime;
 
-import org.junit.Test;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.temporal.*;
 import java.util.Locale;
+import org.junit.jupiter.api.Test;
 
 public class DatesTest {
 

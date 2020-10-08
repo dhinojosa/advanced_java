@@ -2,9 +2,7 @@ package com.xyzcorp.demos.generics;
 
 import com.xyzcorp.demos.generics.bridge.MyNode;
 import com.xyzcorp.demos.generics.bridge.Node;
-import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class BridgeTest {
 

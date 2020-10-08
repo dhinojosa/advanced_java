@@ -4,7 +4,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.xyzcorp.demos.generics.people.EyeColor;
 import com.xyzcorp.demos.generics.people.Person;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 

@@ -2,8 +2,8 @@ package com.xyzcorp.demos.reactive;
 
 import io.reactivex.*;
 import io.reactivex.schedulers.Schedulers;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 @SuppressWarnings("Duplicates")
@@ -15,7 +15,7 @@ public class ObservableBackpressureTest {
     private Flowable<Integer> crazedFlowableBackPressuredBuffer;
     private Flowable<Integer> crazedFlowableBackPressuredLatest;
 
-    @Before
+    @BeforeEach
     public void startUp() {
         crazedObservable = Observable.create
                 (e -> {

@@ -2,7 +2,8 @@ package com.xyzcorp.demos.generics;
 
 import com.xyzcorp.demos.generics.subclassing.MySafeNode;
 import com.xyzcorp.demos.generics.subclassing.Node;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

@@ -2,7 +2,7 @@ package com.xyzcorp.demos.reactive;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,7 +1,7 @@
 package com.xyzcorp.demos.generics;
 
 import com.xyzcorp.demos.generics.people.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
