@@ -1,7 +1,5 @@
 package com.xyzcorp.exercises.generics;
 
-import org.junit.jupiter.api.Test;
-
-public class GenericsExercises {
+public class BoxTest {
 
 }
