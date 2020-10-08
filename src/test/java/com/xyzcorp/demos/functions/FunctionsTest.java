@@ -79,6 +79,15 @@ public class FunctionsTest {
     }
 
     @Test
+    public void testToStringOfTaxRates() {
+        List<TaxRate> taxRates = Arrays.asList(new TaxRate(2008, .20),
+            new TaxRate(2009, .21), new TaxRate(2010, .21));
+
+        Functions.myForEach(Functions.myMap(taxRates, Object::toString),
+            System.out::println);
+    }
+
+    @Test
     public void testMethodReferenceAnInstance() {
         List<Integer> numbers = Arrays.asList(2, 4, 5, 1, 9, 15, 19,
             21, 33, 78, 93, 10);
@@ -96,15 +105,7 @@ public class FunctionsTest {
     @Test
     public void testMyGenerate() {
         List<LocalDateTime> localDateTimes =
-            Functions.myGenerate(() -> {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    //Ignore the exception
-                }
-
-                return LocalDateTime.now();
-            }, 10);
+            Functions.myGenerate(LocalDateTime::now, 10);
         System.out.println(localDateTimes);
     }
 
