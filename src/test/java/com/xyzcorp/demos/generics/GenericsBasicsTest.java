@@ -97,7 +97,6 @@ public class GenericsBasicsTest {
                 new ArrayList<Long>().getClass());
     }
 
-
     @Test
     public void testStream() {
         /*
