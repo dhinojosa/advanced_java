@@ -82,6 +82,7 @@ public class ContravariantTest {
     }
 
     //17. Contravariant Assignment
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Test
     public void testContravariantAssignment() {
         ArrayList<Person> people = new ArrayList<>();
@@ -90,6 +91,7 @@ public class ContravariantTest {
         people.add(new Coloradan());
         people.add(new Mexican());
         people.add(new European());
+        people.add(new Bulgarian());
 
         List<? super American> americans = people;
 
