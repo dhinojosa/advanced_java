@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Flow;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.LongStream;
 
 public class MyPublisher implements Flow.Publisher<Long> {
     private final ExecutorService executorService;
@@ -26,13 +27,21 @@ public class MyPublisher implements Flow.Publisher<Long> {
                         .onError(
                             new Throwable("count request should be positive"));
 
-                    long goal = counter.get() + n;
-                    while (counter.get() < goal && !done.get()) {
+                    long i = 0;
+                    while(i < n && !done.get()) {
                         if (counter.get() == Long.MAX_VALUE) {
                             subscriber.onComplete();
                         }
                         subscriber.onNext(counter.getAndIncrement());
+                        i++;
                     }
+//                    long goal = counter.get() + n;
+//                    while (counter.get() < goal && !done.get()) {
+//                        if (counter.get() == Long.MAX_VALUE) {
+//                            subscriber.onComplete();
+//                        }
+//                        subscriber.onNext(counter.getAndIncrement());
+//                    }
                 });
             }
 
