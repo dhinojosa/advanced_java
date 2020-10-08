@@ -55,7 +55,8 @@ public class OptionalsTest {
     @Test
     public void testGettingTheValueTheBadWay() {
         Optional<Long> optionalLong = Optional.empty();
-        assertThatThrownBy(optionalLong::get).isInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> optionalLong.get())
+            .isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -72,7 +73,7 @@ public class OptionalsTest {
     @Test
     public void testGettingTheValueTheGoodWayUsingOrElseGet() {
         Optional<Long> optionalLong = Optional.of(40L);
-        Long result = optionalLong.orElseGet(this::getDefaultAverage);
+        Long result = optionalLong.orElseGet(() -> getDefaultAverage());
         assertThat(result).isEqualTo(40L);
     }
 
