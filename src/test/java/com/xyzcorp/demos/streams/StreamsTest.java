@@ -1,9 +1,7 @@
 package com.xyzcorp.demos.streams;
 
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.*;
@@ -16,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class StreamsTest {
 
+    @SuppressWarnings("SameParameterValue")
     private static Optional<Character> safeCharAt(String s, int index) {
         try {
             return Optional.of(s.charAt(index));
@@ -159,6 +158,7 @@ public class StreamsTest {
     }
 
     /* Conversion */
+    @SuppressWarnings("SimplifyStreamApiCallChains")
     @Test
     public void testFromSpecializedStreamToGeneralStream() {
         IntStream stream = IntStream.range(0, 5);
@@ -280,6 +280,7 @@ public class StreamsTest {
         assertThat(distinct).containsOnly("Left", "Right");
     }
 
+    @SuppressWarnings("ComparatorCombinators")
     @Test
     public void testSortedWithComparator() {
         Stream<String> stream =
@@ -362,8 +363,8 @@ public class StreamsTest {
         Optional<Integer> first = Stream.of(1, 2, 4, 5)
                                         .findFirst();
         first
-            .ifPresentOrElse(x -> assertThat(x).isEqualTo(1), () -> fail(
-                "Unexpected"));
+            .ifPresentOrElse(x -> assertThat(x).isEqualTo(1),
+                () -> fail("Unexpected"));
     }
 
     @Test
@@ -371,7 +372,8 @@ public class StreamsTest {
         Optional<Integer> first = Stream.<Integer>empty()
             .findFirst();
         first
-            .ifPresentOrElse(x -> fail("Unexpected"), () -> assertTrue(true));
+            .ifPresentOrElse(x -> fail("Unexpected"),
+                () -> assertTrue(true));
     }
 
     @Test
@@ -383,8 +385,7 @@ public class StreamsTest {
     /* Infinite Streams */
     @Test
     public void testIterate() {
-        Stream<Integer> iterate = Stream.iterate(0,
-            integer -> integer + 3);
+        Stream<Integer> iterate = Stream.iterate(0, integer -> integer + 3);
         List<Integer> result = iterate.limit(5).collect(Collectors.toList());
         System.out.println(result);
     }
@@ -394,7 +395,7 @@ public class StreamsTest {
         List<Integer> result = Stream.iterate(0, x -> x <= 5,
             integer -> integer + 1).collect(Collectors.toList());
         System.out.println(result);
-        assertThat(result).isEqualTo(List.of(0,1,2,3,4,5));
+        assertThat(result).isEqualTo(List.of(0, 1, 2, 3, 4, 5));
     }
 
     @Test
@@ -421,8 +422,9 @@ public class StreamsTest {
     public void testGroupingBy() {
         IntStream stream = IntStream.range(0, 10);
         Map<Boolean, List<Integer>> groups =
-            stream.boxed()
-                  .collect(Collectors.groupingBy(i -> i % 2 == 0));
+            stream
+                .boxed()
+                .collect(Collectors.groupingBy(i -> i % 2 == 0));
         System.out.println(groups);
         assertThat(groups)
             .containsKeys(false, true)
@@ -430,6 +432,7 @@ public class StreamsTest {
     }
 
     @Test
+    @SuppressWarnings("SpellCheckingInspection")
     public void testPartitioning() {
         Stream<String> stream =
             Stream.of("Apple", "Orange", "Banana", "Tomato", "Grapes");
@@ -457,11 +460,11 @@ public class StreamsTest {
 
         Map<String, Integer> result = orders
             .stream()
-            .collect(Collectors
-                .toMap(Order::getFirstName,
+            .collect(Collectors.toMap(Order::getFirstName,
                     o -> o.getOrderItems()
                           .stream()
-                          .mapToInt(OrderItem::getQuantity).sum()));
+                          .mapToInt(OrderItem::getQuantity)
+                          .sum()));
 
         System.out.println(result);
     }
@@ -495,14 +498,6 @@ public class StreamsTest {
     }
 
     @Test
-    public void testSummingInt() {
-        List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        Integer result = numbers.stream().map(x -> x + 1)
-                                .collect(Collectors.summingInt(x -> x));
-        System.out.println(result);
-    }
-
-    @Test
     public void testBasicCustomCollector() {
         List<Integer> numbers =
             Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -511,6 +506,19 @@ public class StreamsTest {
                    .map(x -> x + 1)
                    .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
         System.out.println("Ending with the result = " + result);
+    }
+
+    @Test
+    @SuppressWarnings("SimplifyStreamApiCallChains")
+    public void testSummingInt() {
+        List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        //The following can be replaced with mapToInt
+        Integer result =
+            numbers
+                .stream()
+                .map(x -> x + 1)
+                .collect(Collectors.summingInt(x -> x));
+        System.out.println(result);
     }
 
 
@@ -523,7 +531,7 @@ public class StreamsTest {
                      .boxed()
                      .parallel()
                      .map(x -> x + 1)
-                     .peek(x-> System.out.println("parallel:" + Thread.currentThread().getName()))
+                     .peek(x -> System.out.println("parallel:" + Thread.currentThread().getName()))
                      .collect(Collectors.toList());
         System.out.println(collect);
     }
