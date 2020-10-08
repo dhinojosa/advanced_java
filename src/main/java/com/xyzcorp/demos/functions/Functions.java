@@ -43,8 +43,6 @@ public class Functions {
         }
         return result;
     }
-
-
 }
 
 
