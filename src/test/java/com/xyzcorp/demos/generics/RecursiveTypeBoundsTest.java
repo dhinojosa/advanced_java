@@ -36,8 +36,8 @@ public class RecursiveTypeBoundsTest {
         assertThat(foo.compareTo(foo2)).isLessThan(0);
     }
 
-    private static <T extends Comparable<T>> Optional<T> myMax(Collection<T>
-                                                                       items) {
+    private static <T extends Comparable<T>> Optional<T>
+                            myMax(Collection<T> items) {
         T result = null;
         for (T item : items) {
             if (result == null || item.compareTo(result) > 0) result = item;
