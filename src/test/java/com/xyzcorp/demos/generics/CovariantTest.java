@@ -6,14 +6,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings(value = {"WeakerAccess", "unused", "RedundantTypeArguments"})
+@SuppressWarnings(value = {"WeakerAccess", "unused"})
 public class CovariantTest {
     public void processCovariantList(List<? extends NorthAmerican> northAmericansOrLower) {
         Object object = northAmericansOrLower.get(0);
         Person person = northAmericansOrLower.get(0);
         NorthAmerican northAmerican = northAmericansOrLower.get(0);
 
-
+        //at the expense of losing it here.
         //northAmericansOrLower.add(new Object());
         //northAmericansOrLower.add(new NorthAmerican());
         //northAmericansOrLower.add(new American());
@@ -53,6 +53,7 @@ public class CovariantTest {
     //11. Process Covariant List
     @Test
     public void testCovariantAmericanList() {
+        //I gain flexibility here
         List<Missourian> missourians = new ArrayList<>();
         missourians.add(new StLouisan());
         missourians.add(new StLouisan());
@@ -111,18 +112,11 @@ public class CovariantTest {
         people.add(null);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public void processUnbounded(List<?> list) {
+        Object o = list.get(0);
+        list.set(4, null);
+        list.add(null);
+    }
 
     //13. Process Covariant Assignment
     @Test
@@ -133,54 +127,22 @@ public class CovariantTest {
         processCovariantPersonList(dallasites);
     }
 
-
-
-
-
-
-
-
-
-
-    public void processUnbounded(List<?> objects) {
-        Object o = objects.get(0);
-        objects.set(4, null);
-        objects.add(null);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //15. Process Covariant Assignment with Object List
     @Test
-    public void testProcessCovariantObjectList() throws Exception {
+    public void testProcessCovariantObjectList() {
         List<Object> objects = new ArrayList<>();
         objects.add(new Denverite());
         objects.add(new Floridian());
         processCovariantObjectList(objects);
 
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
         List<?> objects2 = objects;
         processCovariantObjectList(objects2);
     }
 
-
     //14. Process Covariant Assignment
+    @SuppressWarnings("TypeParameterExplicitlyExtendsObject")
     public void processCovariantObjectList(
             List<? extends Object> people) {
         Object object = people.get(0);
@@ -190,6 +152,7 @@ public class CovariantTest {
         people.add(null);
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Test
     public void testMixMatchedPersonList() {
         List<Bostonian> bostonians = new ArrayList<>();
