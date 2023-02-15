@@ -12,11 +12,11 @@ public class FluxTest {
 
     @Test
     public void testFluxWithSubscriber() throws InterruptedException {
-        Flux<Integer> integerFlux = Flux.create(integerFluxSink -> {
-            integerFluxSink.next(10);
-            integerFluxSink.next(50);
-            integerFluxSink.next(100);
-            integerFluxSink.complete();
+        Flux<Integer> integerFlux = Flux.create(emitter -> {
+            emitter.next(10);
+            emitter.next(50);
+            emitter.next(100);
+            emitter.complete();
         });
 
 
