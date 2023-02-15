@@ -11,6 +11,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.Pipe;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -45,10 +46,17 @@ public class ChannelTest {
     }
 
     @Test
+    void testFilesNIOCopy() {
+//        Files.
+//        Paths.get()
+//             Path.
+    }
+
+    @Test
     void testWritingBufferWithPut() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         byteBuffer.putInt(10);
-
+        byteBuffer.flip();
         try (FileChannel fileChannel = FileChannel.open(Path.of(userDirectory
             , "src/main/resources", "ints.bin"), CREATE, WRITE)) {
             fileChannel.write(byteBuffer);
@@ -75,6 +83,7 @@ public class ChannelTest {
     @Test
     void testBufferUsingCompact() {
         IntBuffer intBuffer = IntBuffer.allocate(32 * 1000);
+        debugBuffer(intBuffer);
         intBuffer.put(30);
         debugBuffer(intBuffer);
         intBuffer.put(40);
@@ -87,6 +96,7 @@ public class ChannelTest {
         debugBuffer(intBuffer);
         assertThat(intBuffer.get()).isEqualTo(30);
         assertThat(intBuffer.get()).isEqualTo(40);
+        debugBuffer(intBuffer);
         intBuffer.compact();
         debugBuffer(intBuffer);
     }

@@ -16,10 +16,10 @@ public class EchoServer {
 
     public static void main(String[] args) throws IOException {
         Selector selector = Selector.open();
-        ServerSocketChannel serverSocket = ServerSocketChannel.open();
-        serverSocket.bind(new InetSocketAddress("localhost", 5454));
-        serverSocket.configureBlocking(false);
-        serverSocket.register(selector, SelectionKey.OP_ACCEPT);
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.bind(new InetSocketAddress("localhost", 5454));
+        serverSocketChannel.configureBlocking(false);
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         ByteBuffer buffer = ByteBuffer.allocate(256);
 
         while (true) {
@@ -31,7 +31,7 @@ public class EchoServer {
                 SelectionKey key = iter.next();
 
                 if (key.isAcceptable()) {
-                    register(selector, serverSocket);
+                    register(selector, serverSocketChannel);
                 }
 
                 if (key.isReadable()) {

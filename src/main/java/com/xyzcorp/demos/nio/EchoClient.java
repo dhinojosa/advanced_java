@@ -6,25 +6,26 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class EchoClient {
-    private static SocketChannel client;
+    private static SocketChannel socketChannel;
     private static ByteBuffer buffer;
     private static EchoClient instance;
 
-    public static EchoClient start() {
+    public synchronized static EchoClient start() {
         if (instance == null)
             instance = new EchoClient();
 
         return instance;
     }
 
-    public static void stop() throws IOException {
-        client.close();
+    public synchronized  static void stop() throws IOException {
+        socketChannel.close();
         buffer = null;
     }
 
     private EchoClient() {
         try {
-            client = SocketChannel.open(new InetSocketAddress("localhost", 5454));
+            socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 5454));
+            socketChannel.finishConnect();
             buffer = ByteBuffer.allocate(256);
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,9 +36,9 @@ public class EchoClient {
         buffer = ByteBuffer.wrap(msg.getBytes());
         String response = null;
         try {
-            client.write(buffer);
+            socketChannel.write(buffer);
             buffer.clear();
-            client.read(buffer);
+            socketChannel.read(buffer);
             response = new String(buffer.array()).trim();
             System.out.println("response=" + response);
             buffer.clear();
@@ -45,5 +46,14 @@ public class EchoClient {
             e.printStackTrace();
         }
         return response;
+    }
+
+    public static void main(String[] args) throws IOException {
+        EchoClient echoClient = EchoClient.start();
+        String resp1 = echoClient.sendMessage("hello");
+        String resp2 = echoClient.sendMessage("world");
+        System.out.println(resp1);
+        System.out.println(resp2);
+        EchoClient.stop();
     }
 }

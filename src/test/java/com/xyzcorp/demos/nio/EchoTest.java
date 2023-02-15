@@ -15,10 +15,12 @@ public class EchoTest {
     @BeforeAll
     public static void setUp() throws IOException, InterruptedException {
         client = EchoClient.start();
+        System.out.println("client = " + client);
     }
 
     @Test
     public void givenServerClient_whenServerEchosMessage_thenCorrect() {
+        System.out.println("clientTest = " + client);
         String resp1 = client.sendMessage("hello");
         String resp2 = client.sendMessage("world");
         assertEquals("hello", resp1);
