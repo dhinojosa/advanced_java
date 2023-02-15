@@ -1,5 +1,7 @@
 package com.xyzcorp.demos.reactive;
 
+import com.xyzcorp.demos.jol.JOLSample_01_Basic;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Flow;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -7,6 +9,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.LongStream;
 
 public class MyPublisher implements Flow.Publisher<Long> {
+    //This is will be available to all subscription
     private final ExecutorService executorService;
 
     public MyPublisher(ExecutorService executorService) {
@@ -15,34 +18,28 @@ public class MyPublisher implements Flow.Publisher<Long> {
 
     @Override
     public void subscribe(Flow.Subscriber<? super Long> subscriber) {
+        //This is local to the subscribe method, which means you can set
+        //up some variable that will be closured in the Subscription
+
         subscriber.onSubscribe(new Flow.Subscription() {
-            AtomicLong counter = new AtomicLong(0);
-            AtomicBoolean done = new AtomicBoolean(false);
+            final AtomicLong requests = new AtomicLong();
+            final AtomicLong counter = new AtomicLong();
+            final AtomicBoolean done = new AtomicBoolean();
+            final AtomicBoolean started = new AtomicBoolean(false);
+
+            //variables here - the scope is the subscription
 
             @Override
             public void request(long n) {
-                executorService.submit(() -> {
-                    System.out.println("In subscribe:" + Thread.currentThread().getName());
-                    if (n < 0) subscriber
-                        .onError(
-                            new Throwable("count request should be positive"));
-
-                    long i = 0;
-                    while(i < n && !done.get()) {
-                        if (counter.get() == Long.MAX_VALUE) {
-                            subscriber.onComplete();
+                requests.addAndGet(n);
+                if (!started.get()) {
+                    executorService.submit(() -> {
+                        started.set(true);
+                        while (!done.get() && requests.getAndDecrement() != 0) {
+                            subscriber.onNext(counter.incrementAndGet());
                         }
-                        subscriber.onNext(counter.getAndIncrement());
-                        i++;
-                    }
-//                    long goal = counter.get() + n;
-//                    while (counter.get() < goal && !done.get()) {
-//                        if (counter.get() == Long.MAX_VALUE) {
-//                            subscriber.onComplete();
-//                        }
-//                        subscriber.onNext(counter.getAndIncrement());
-//                    }
-                });
+                    });
+                }
             }
 
             @Override

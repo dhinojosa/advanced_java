@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelTest {
 
-        String userDirectory = System.getProperty("user.dir");
+    String userDirectory = System.getProperty("user.dir");
 
 
     @Test
